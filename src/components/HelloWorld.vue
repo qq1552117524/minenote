@@ -1,16 +1,42 @@
 <template>
   <div class="hello">
-    <p>{{msg}}</p>首页登录
+    <p>{{msg}}</p>
+    <button @click="login">登录</button>
+    <button @click="about">关于</button>
     <img src="../assets/logo.png">
+    <my-dialog :isShow="dialogShow" @on-close="closeDialog('dialogShow')">
+      账号<input type="text"><br>
+      密码<input type="text">
+    </my-dialog>
+    <my-dialog :isShow="dialogShowAbout" @on-close="closeDialog('dialogShowAbout')">
+      关于我们
+    </my-dialog>
   </div>
 </template>
 
 <script>
+import dialog from './dialog'
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'mineNote inex'
+      msg: 'mineNote index 首页',
+      dialogShow: false,
+      dialogShowAbout: false
+    }
+  },
+  components : {
+    myDialog:dialog
+  },
+  methods : {
+    login () {
+      this.dialogShow = true
+    },
+    closeDialog (attr) {
+      this[attr] = false
+    },
+    about () {
+      this.dialogShowAbout = true
     }
   }
 }

@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <myHeader></myHeader>
+    <myHeader>
+      <!-- <p>我是插入插槽solt的部分哦</p> -->
+    </myHeader>
     <div class="app-content">
       <keep-alive>
         <router-view></router-view>
@@ -38,4 +40,7 @@ export default {
 ul{
   list-style: none
 }
+.cl{
+        clear: both;
+    }
 </style>

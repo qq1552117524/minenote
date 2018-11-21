@@ -15,6 +15,7 @@ export default {
          console.log(this.$route.params)
         }
     },
+    //VueResource  的get请求
     created: function () {
         this.$http.get('getlist')
         .then(function(data){
