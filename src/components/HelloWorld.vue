@@ -5,8 +5,10 @@
     <button @click="about">关于</button>
     <img src="../assets/logo.png">
     <my-dialog :isShow="dialogShow" @on-close="closeDialog('dialogShow')">
-      账号<input type="text"><br>
-      密码<input type="text">
+      用户名：<input type="text" v-model="userModel"><br>
+      <span>{{ userError }}</span><br>
+      密  码：<input type="text" v-model="psdModel"><br>
+      <span>{{ psdError }}</span><br>
     </my-dialog>
     <my-dialog :isShow="dialogShowAbout" @on-close="closeDialog('dialogShowAbout')">
       关于我们
@@ -22,7 +24,9 @@ export default {
     return {
       msg: 'mineNote index 首页',
       dialogShow: false,
-      dialogShowAbout: false
+      dialogShowAbout: false,
+      userModel:'',
+      psdModel:''
     }
   },
   components : {
@@ -37,6 +41,18 @@ export default {
     },
     about () {
       this.dialogShowAbout = true
+    }
+  },
+  computed : {
+    userError(){
+      if(!/@/g.test(this.userModel)){
+        return  '用户名错误'
+      }
+    },
+    psdError () {
+      if(!/^\w{1,6}/g.test(this.psdModel)){
+        return '密码长度为6位数'
+      }
     }
   }
 }
