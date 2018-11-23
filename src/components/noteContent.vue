@@ -4,10 +4,10 @@
         <div class="kindOfnote">
             <ul>
                 <li>
-                    <router-link to="/noteContent/dateNote" style="width: 100%;display: block;">日记</router-link>
+                    <router-link to="/noteContent/dateNote" style="width: 100%;display: block;" active-class="active">日记</router-link>
                 </li>
                 <li>
-                    <router-link to="/noteContent/anythingNote" style="width: 100%;display: block;">随笔</router-link>
+                    <router-link to="/noteContent/anythingNote" style="width: 100%;display: block;"  active-class="active">随笔</router-link>
                 </li>
                 <div class="cl"></div>
             </ul>
@@ -28,6 +28,9 @@ export default {
         background:#ddd;
         border:1px solid #fff
     }
+.active{
+    background:#fff;
+}
 .content{
     height: 200px;
     border: 1px solid #ddd;

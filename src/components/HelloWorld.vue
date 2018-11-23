@@ -1,14 +1,18 @@
 <template>
   <div class="hello">
     <p>{{msg}}</p>
-    <button @click="login">登录</button>
-    <button @click="about">关于</button>
     <img src="../assets/logo.png">
-    <my-dialog :isShow="dialogShow" @on-close="closeDialog('dialogShow')">
+    <div>
+      <button @click="login">登录</button>
+      <button @click="about">关于</button>  
+    </div>
+    <my-dialog :isShow="dialogShow" @on-close="closeDialog('dialogShow')" >
       用户名：<input type="text" v-model="userModel"><br>
-      <span>{{ userError }}</span><br>
+      <span>{{ userError.errorText }}</span><br>
       密  码：<input type="text" v-model="psdModel"><br>
-      <span>{{ psdError }}</span><br>
+      <span>{{ psdError.errorText }}</span><br>
+      <button style="margin-top: 45px;" @click="onLogin">登录</button>
+      <p>{{ loginError }}</p><br>
     </my-dialog>
     <my-dialog :isShow="dialogShowAbout" @on-close="closeDialog('dialogShowAbout')">
       关于我们
@@ -18,15 +22,16 @@
 
 <script>
 import dialog from './dialog'
-export default {
+export default { 
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'mineNote index 首页',
+      msg: '首页',
       dialogShow: false,
       dialogShowAbout: false,
       userModel:'',
-      psdModel:''
+      psdModel:'',
+      loginError:''
     }
   },
   components : {
@@ -41,18 +46,42 @@ export default {
     },
     about () {
       this.dialogShowAbout = true
+    },
+    onLogin () {
+      if( !this.userError.status || !this.psdError.status ){
+        this.loginError = '提交内容错误'
+      }
+      else{
+        this.loginError = ''
+        alert('提交成功')
+        this.dialogShow = false
+      }
     }
   },
   computed : {
     userError(){
+      let errorText,status
       if(!/@/g.test(this.userModel)){
-        return  '用户名错误'
+        errorText = '用户名错误',
+        status = false
       }
+      else{
+        errorText = '',
+        status = true
+      }
+      return{errorText,status}
     },
     psdError () {
-      if(!/^\w{1,6}/g.test(this.psdModel)){
-        return '密码长度为6位数'
+      let errorText,status
+      if(!/^\w{1,6}$/g.test(this.psdModel)){
+        errorText = '密码长度为1-6位数',
+        status = false
       }
+      else{
+        errorText = '',
+        status = true
+      }
+      return{status,errorText}
     }
   }
 }

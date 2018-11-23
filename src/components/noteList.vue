@@ -1,10 +1,10 @@
 <template>
     <div>
         <img src="../assets/logo.png">
-        noteList日记列表
-        <button @click="getParams">
-        <router-link :to="{ name:'noteContent', params:{id:1} }">第一个日志</router-link>
-        </button>
+        <p>noteList日记列表</p>
+        <ul style="margin-top:10px">
+            <router-link :to="{ name:'noteContent', params:{id:1} }" tag="li" @click="getParams">第一个日志</router-link>
+        </ul>
     </div>
 </template>
 

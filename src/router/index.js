@@ -26,8 +26,8 @@ export default new Router({
       path: '/noteContent/:id',
       name: 'noteContent',
       component: noteContent,
+      // redirect:'/noteContent/:id/dateNote',
       children:[
-        {path:'/noteContent',redirect:to=>{ return '/noteContent/dateNote'} },
         {
           path:'/noteContent/dateNote',
           component:dateNote,
